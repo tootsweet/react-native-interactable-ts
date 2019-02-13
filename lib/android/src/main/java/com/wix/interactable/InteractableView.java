@@ -6,6 +6,7 @@ import android.graphics.PointF;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -64,6 +65,16 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     private int mTouchSlop;
     private boolean isChildIsScrollContainer = false;
     private boolean skippedOneInterception;
+
+
+    private GestureDetector.SimpleOnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            listener.onSingleTapUp();
+            return true;
+        }
+    };
+    private GestureDetector gestureDetector = new GestureDetector(getContext(), gestureListener);
 
 
     public InteractableView(Context context) {
@@ -173,6 +184,8 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
 
+        gestureDetector.onTouchEvent(ev);
+
         final int actionMasked = ev.getAction() & MotionEvent.ACTION_MASK;
 
         // initiate the dragStartLocation and flags
@@ -232,6 +245,7 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
         handleTouch(event);
         getParent().requestDisallowInterceptTouchEvent(true);
         return true;
@@ -563,5 +577,6 @@ public class InteractableView extends ViewGroup implements PhysicsAnimator.Physi
         void onAnimatedEvent(float x, float y);
         void onDrag(String state, float x, float y, String targetSnapPointId);
         void onStop(float x, float y);
+        void onSingleTapUp();
     }
 }

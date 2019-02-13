@@ -141,4 +141,23 @@ public class Events {
             rctEventEmitter.receiveEvent(getViewTag(), getEventName(), eventData);
         }
     }
+
+    public static class onSingleTapUp extends Event<onSingleTapUp> {
+
+        WritableMap eventData;
+
+        public onSingleTapUp(int viewTag) {
+            super(viewTag);
+            eventData = Arguments.createMap();
+        }
+
+        @Override
+        public String getEventName() { return "onSingleTapUp"; }
+
+        @Override
+        public void dispatch(RCTEventEmitter rctEventEmitter) {
+            rctEventEmitter.receiveEvent(getViewTag(), getEventName(), eventData);
+        }
+    }
+
 }

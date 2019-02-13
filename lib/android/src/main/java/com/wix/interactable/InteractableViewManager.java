@@ -163,6 +163,7 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
                 .put("onAnimatedEvent", MapBuilder.of("registrationName", "onAnimatedEvent"))
                 .put("onDrag", MapBuilder.of("registrationName", "onDrag"))
                 .put("onStop", MapBuilder.of("registrationName", "onStop"))
+                .put("onSingleTapUp", MapBuilder.of("registrationName", "onSingleTapUp"))
                 .build();
     }
 
@@ -203,6 +204,11 @@ public class InteractableViewManager extends ViewGroupManager<InteractableView> 
         @Override
         public void onStop(float x, float y) {
             eventDispatcher.dispatchEvent(new Events.onStop(interactableView.getId(), x, y));
+        }
+
+        @Override
+        public void onSingleTapUp() {
+            eventDispatcher.dispatchEvent(new Events.onSingleTapUp(interactableView.getId()));
         }
     }
 }
