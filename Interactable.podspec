@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.authors      = { "Tal Kol" => "talkol@gmail.com" }
   s.platform     = :ios, "7.0"
 
-  s.source       = { :git => "https://github.com/wix/react-native-interactable.git" }
+  s.source       = { :git => "https://github.com/tootsweet/react-native-interactable-ts.git" }
   s.source_files  = "lib/ios/Interactable/*.{h,m}"
 
   s.dependency 'React'
